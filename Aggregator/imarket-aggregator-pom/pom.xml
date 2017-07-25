@@ -1,0 +1,39 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>imarket-aggregator-pom</artifactId>
+	<packaging>pom</packaging>
+	<name>imarket-aggregator-pom</name>
+	<description></description>
+
+	<profiles>
+		<profile>
+			<id>All</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+
+			<modules>
+
+				<!-- BASE POMS -->
+				<module>../../Common/imarket-common-pom</module>
+				<module>../../Server/imarket-base-persistence</module>
+				<!-- SERVICES -->
+				<module>../../Common/imarket-common-utilities</module>
+				<module>../../Services/imarket-Service</module>
+			
+				<!-- WEB SERVICES -->
+				<!-- <module>../../WebService/imarket-web-services</module> -->
+				
+				<!-- WEB -->
+				<module>../../Client/imarket-web-client</module>
+				
+			</modules>
+
+		</profile>
+	</profiles>
+	<version>0.0.1-SNAPSHOT</version>
+	<groupId>com.iopex.imarket</groupId>
+</project>

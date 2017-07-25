@@ -1,0 +1,116 @@
+.form-group.custom-form-group {
+	display: block;
+	padding: 1%;
+}
+
+textarea.form-control {
+	resize: vertical;
+}
+
+.custom-btn-group {
+	text-align: center;
+	padding: 1%;
+}
+
+.custom-panel {
+	margin: 0;
+	border-radius: 0px;
+}
+/*****Upload Button style start******/
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	filter: alpha(opacity = 0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+
+/*****Upload Button style End******/
+.col-md-12.upload-btn-group {
+	text-align: center;
+}
+
+input#file_text {
+	width: auto;
+}
+
+.custom-input-group {
+	width: 60%;
+	float: left;
+}
+/*****Editor style start******/
+.pell-content-custom-name {
+	height: 300px;
+	max-height: 300px;
+	border: 1px solid;
+	margin-top: 0.1%;
+	overflow: auto;
+}
+/*****Editor style End******/
+input[type="search"] {
+	/* display: block; */
+	/* width: 100%; */
+	height: 34px;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.dataTables_length {
+    margin-top: 1%;
+}
+table.dataTable thead tr th:first-child {
+    width: 300px;
+}
+table.dataTable thead tr {
+    background: #CFDFEC;
+}
+.red, .red:focus {
+    border-color: #ff7272 !important;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,.075), 0 0 8px rgba(255, 180, 180, 0.6);
+}
+.nav-pills>li>a {
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    background: #61b0e6;
+    color:#000;
+    
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #61b0e6;
+}
+.panel.panel-default.file-upload-area {
+    margin-top: 1%;
+}
+
+a.edit-icon {
+    padding: 10%;
+}
