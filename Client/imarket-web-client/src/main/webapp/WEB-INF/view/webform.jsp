@@ -33,7 +33,7 @@
 											readonly>
 									</div>
 									<button type="button" id="upload-btn-valid"
-										class="btn btn-btn-primary btn-sm" onClick ="onUploadFile()">Upload</button>
+										class="btn btn-primary btn-sm" onClick ="onUploadFile()">Upload</button>
 									<button type="submit" id="upload-btn-final"
 										class="btn btn-primary btn-sm" style = "display:none">Upload</button>
 									<button type="button" id="clear-btn"
