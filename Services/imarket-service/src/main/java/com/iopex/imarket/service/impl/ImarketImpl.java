@@ -138,28 +138,31 @@ public class ImarketImpl implements Imarket {
 	            	List<Prospects> prospectsLst = new ArrayList<Prospects>();
 	            	Prospects prospects = null;
 	            	while(iterator.hasNext()){                              
-		            	row = iterator.next();  
-		            	prospects = new Prospects(null, row.get(headerMap.get(HeaderList.COMPANY_NAME.header())),
-		            			row.get(headerMap.get(HeaderList.CONTACT_PERSON_1.header())), 
-		            			row.get(headerMap.get(HeaderList.CONTACT_JOB_TITLE_1.header())),
-		            			row.get(headerMap.get(HeaderList.CONTACT_EMAIL_ADDRESS_1.header())), 
-		            			row.get(headerMap.get(HeaderList.CONTACT_PHONE_1.header())), 
-		            			row.get(headerMap.get(HeaderList.CONTACT_PERSON_2.header())),
-		            			row.get(headerMap.get(HeaderList.CONTACT_JOB_TITLE_2.header())), 
-		            			row.get(headerMap.get(HeaderList.CONTACT_EMAIL_ADDRESS_2.header())), 
-		            			row.get(headerMap.get(HeaderList.CONTACT_PHONE_2.header())),
-		            			row.get(headerMap.get(HeaderList.CONTACT_PERSON_3.header())),
-		            			row.get(headerMap.get(HeaderList.CONTACT_JOB_TITLE_3.header())), 
-		            			row.get(headerMap.get(HeaderList.CONTACT_EMAIL_ADDRESS_3.header())),
-		            			row.get(headerMap.get(HeaderList.CONTACT_PHONE_3.header())),
-		            			row.get(headerMap.get(HeaderList.INDUSTRY.header())), 
-		            			row.get(headerMap.get(HeaderList.EMPLOYEE_COUNT.header())), 
-		            			row.get(headerMap.get(HeaderList.COMPANY_WEBSITE.header())),
-		            			row.get(headerMap.get(HeaderList.COUNTRY.header())),
-		            			row.get(headerMap.get(HeaderList.COMPANY_EMAIL.header())),
-		            			row.get(headerMap.get(HeaderList.REVENUE.header())),
-		            			row.get(headerMap.get(HeaderList.LEAD_SOURCE.header())),0);
-		            	prospectsLst.add(prospects);
+		            	row = iterator.next();
+		            	if(! row.get(headerMap.get(HeaderList.COMPANY_NAME.header())).isEmpty()){
+		            		prospects = new Prospects(null, row.get(headerMap.get(HeaderList.COMPANY_NAME.header())),
+			            			row.get(headerMap.get(HeaderList.CONTACT_PERSON_1.header())), 
+			            			row.get(headerMap.get(HeaderList.CONTACT_JOB_TITLE_1.header())),
+			            			row.get(headerMap.get(HeaderList.CONTACT_EMAIL_ADDRESS_1.header())), 
+			            			row.get(headerMap.get(HeaderList.CONTACT_PHONE_1.header())), 
+			            			row.get(headerMap.get(HeaderList.CONTACT_PERSON_2.header())),
+			            			row.get(headerMap.get(HeaderList.CONTACT_JOB_TITLE_2.header())), 
+			            			row.get(headerMap.get(HeaderList.CONTACT_EMAIL_ADDRESS_2.header())), 
+			            			row.get(headerMap.get(HeaderList.CONTACT_PHONE_2.header())),
+			            			row.get(headerMap.get(HeaderList.CONTACT_PERSON_3.header())),
+			            			row.get(headerMap.get(HeaderList.CONTACT_JOB_TITLE_3.header())), 
+			            			row.get(headerMap.get(HeaderList.CONTACT_EMAIL_ADDRESS_3.header())),
+			            			row.get(headerMap.get(HeaderList.CONTACT_PHONE_3.header())),
+			            			row.get(headerMap.get(HeaderList.INDUSTRY.header())), 
+			            			row.get(headerMap.get(HeaderList.EMPLOYEE_COUNT.header())), 
+			            			row.get(headerMap.get(HeaderList.COMPANY_WEBSITE.header())),
+			            			row.get(headerMap.get(HeaderList.COUNTRY.header())),
+			            			row.get(headerMap.get(HeaderList.COMPANY_EMAIL.header())),
+			            			row.get(headerMap.get(HeaderList.REVENUE.header())),
+			            			row.get(headerMap.get(HeaderList.LEAD_SOURCE.header())),0);
+			            	prospectsLst.add(prospects);
+		            	}
+		            	
 		            	if(prospectsLst.size() == 10){
 		            		prospectsRepository.save(prospectsLst);
 		            		prospectsLst.clear();
@@ -207,13 +210,52 @@ public class ImarketImpl implements Imarket {
 			msg.append(HeaderList.CONTACT_JOB_TITLE_2.header()).append("<br>");  
 		
 		if(!headeList.containsKey(HeaderList.CONTACT_EMAIL_ADDRESS_2.header()))
-			msg.append(HeaderList.CONTACT_EMAIL_ADDRESS_2.header()).append("<br>");  
+			msg.append(HeaderList.CONTACT_EMAIL_ADDRESS_2.header()).append("<br>"); 
+		
+		if(!headeList.containsKey(HeaderList.CONTACT_PHONE_2.header()))
+			msg.append(HeaderList.CONTACT_PHONE_1.header()).append("<br>");  
+		
+		if(!headeList.containsKey(HeaderList.CONTACT_PERSON_3.header()))
+			msg.append(HeaderList.CONTACT_PERSON_3.header()).append("<br>");  
+		
+		if(!headeList.containsKey(HeaderList.CONTACT_JOB_TITLE_3.header()))
+			msg.append(HeaderList.CONTACT_JOB_TITLE_3.header()).append("<br>");  
+		
+		if(!headeList.containsKey(HeaderList.CONTACT_EMAIL_ADDRESS_3.header()))
+			msg.append(HeaderList.CONTACT_EMAIL_ADDRESS_3.header()).append("<br>"); 
+		
+		if(!headeList.containsKey(HeaderList.CONTACT_PHONE_3.header()))
+			msg.append(HeaderList.CONTACT_PHONE_3.header()).append("<br>");  
+		
+		if(!headeList.containsKey(HeaderList.EMPLOYEE_COUNT.header()))
+			msg.append(HeaderList.EMPLOYEE_COUNT.header()).append("<br>");
+		
+		if(!headeList.containsKey(HeaderList.EMPLOYEE_COUNT.header()))
+			msg.append(HeaderList.EMPLOYEE_COUNT.header()).append("<br>");
+		
+		if(!headeList.containsKey(HeaderList.COMPANY_WEBSITE.header()))
+			msg.append(HeaderList.COMPANY_WEBSITE.header()).append("<br>");
+		
+		if(!headeList.containsKey(HeaderList.COUNTRY.header()))
+			msg.append(HeaderList.COUNTRY.header()).append("<br>");
+		
+		if(!headeList.containsKey(HeaderList.COMPANY_EMAIL.header()))
+			msg.append(HeaderList.COMPANY_EMAIL.header()).append("<br>");
+		
+		if(!headeList.containsKey(HeaderList.REVENUE.header()))
+			msg.append(HeaderList.REVENUE.header()).append("<br>");
+		
+		if(!headeList.containsKey(HeaderList.LEAD_SOURCE.header()))
+			msg.append(HeaderList.LEAD_SOURCE.header()).append("<br>");
+		
 		
 		if(msg.length() > 0)
 			return "Following Headers are Missing "+ "<br>" + msg.toString();
 		else
 			return null;
 	}
+	
+
 	@Override
 	public List<ProspectsVO> retriveProspects(int isDeleted) {
 		List<Prospects> prospectsLst = prospectsRepository.findByIsDeleted(isDeleted);;
