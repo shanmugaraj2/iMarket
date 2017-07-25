@@ -1,6 +1,8 @@
 package com.iopex.imarket.utils;
 
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +37,7 @@ public class ProspectsVO implements Serializable{
 	private String revenue;
 	private String leadSource;
 	private int isDeleted;
+	private List<String> industries;
 	
 	
 }
