@@ -7,10 +7,7 @@
 <head>
 <title>iMarket</title>
 
- <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
- <link href="<c:url value="/resources/css/custom.styles.css" />" rel="stylesheet">
-
-
+<jsp:include page="cssresources.jsp" />
 </head>
 <body>
 
@@ -75,11 +72,11 @@
 										<label for="industry" class="txt-label">Industry *</label>
 									</div>
 									<div class="col-md-6">
-									<form:select  class="form-control" path="industry" >
-										 	<form:option value="NONE" label="--- Select ---"/>
+									<form:select  class="form-control" multiple="true" id = "industry" path="industries" >
+										 	
 										 	<form:options items="${industryMap}" />
 									
-   										</form:select>
+   									</form:select>
 									</div>
 								</div>
 							</div>
@@ -89,7 +86,14 @@
 										<label for="employeeCount" class="txt-label">Employee Count *</label>
 									</div>
 									<div class="col-md-6">
-										<form:input class="form-control" path="employeeCount" />
+										<form:select path="employeeCount" class="form-control">
+											   <form:option value="NONE" label="--- Select ---"/>
+											    <form:option value="0 - 100" label="0 - 100"/>
+											    <form:option value="100 - 250" label="100 - 250"/>
+											    <form:option value="250 - 500" label="250 - 500"/>
+											    <form:option value="500 - 1000" label="500 - 1000"/>
+											    <form:option value="Above 1000" label="Above 1000"/>
+										</form:select>  
 									</div>
 								</div>
 							</div>
@@ -208,7 +212,7 @@
 							<div class="col-md-6">
 								<div class="form-group custom-form-group">
 									<div class="col-md-6 txt-label">
-										<label for="contactPerson2" class="txt-label">Contact Person *</label>
+										<label for="contactPerson2" class="txt-label">Contact Person </label>
 									</div>
 									<div class="col-md-6">
 										<form:input class="form-control" path="contactPerson2" />
@@ -218,7 +222,7 @@
 							<div class="col-md-6">
 								<div class="form-group custom-form-group">
 									<div class="col-md-6 txt-label">
-										<label for="contactJobTitle2" class="txt-label">Contact Job Title *</label>
+										<label for="contactJobTitle2" class="txt-label">Contact Job Title </label>
 									</div>
 									<div class="col-md-6">
 										<form:input class="form-control" path="contactJobTitle2" />
@@ -228,7 +232,7 @@
 							<div class="col-md-6">
 								<div class="form-group custom-form-group">
 									<div class="col-md-6 txt-label">
-										<label for="contactPhone2" class="txt-label">Contact Phone *</label>
+										<label for="contactPhone2" class="txt-label">Contact Phone </label>
 									</div>
 									<div class="col-md-6">
 										<form:input class="form-control" path="contactPhone2" />
@@ -238,7 +242,7 @@
 							<div class="col-md-6">
 								<div class="form-group custom-form-group">
 									<div class="col-md-6 txt-label">
-										<label for="contactEmail2" class="txt-label">Email *</label>
+										<label for="contactEmail2" class="txt-label">Email </label>
 									</div>
 									<div class="col-md-6">
 										<form:input class="form-control" path="contactEmail2" onBlur="emailValidation(this)" />
@@ -256,7 +260,7 @@
 							<div class="col-md-6">
 								<div class="form-group custom-form-group">
 									<div class="col-md-6 txt-label">
-										<label for="contactPerson3" class="txt-label">Contact Person *</label>
+										<label for="contactPerson3" class="txt-label">Contact Person </label>
 									</div>
 									<div class="col-md-6">
 										<form:input class="form-control" path="contactPerson3" />
@@ -266,7 +270,7 @@
 							<div class="col-md-6">
 								<div class="form-group custom-form-group">
 									<div class="col-md-6 txt-label">
-										<label for="contactJobTitle3" class="txt-label">Contact Job Title *</label>
+										<label for="contactJobTitle3" class="txt-label">Contact Job Title </label>
 									</div>
 									<div class="col-md-6">
 										<form:input class="form-control" path="contactJobTitle3" />
@@ -276,7 +280,7 @@
 							<div class="col-md-6">
 								<div class="form-group custom-form-group">
 									<div class="col-md-6 txt-label">
-										<label for="contactPhone3" class="txt-label">Contact Phone *</label>
+										<label for="contactPhone3" class="txt-label">Contact Phone </label>
 									</div>
 									<div class="col-md-6">
 										<form:input class="form-control" path="contactPhone3" />
@@ -286,7 +290,7 @@
 							<div class="col-md-6">
 								<div class="form-group custom-form-group">
 									<div class="col-md-6 txt-label">
-										<label for="contactEmail3" class="txt-label">Email *</label>
+										<label for="contactEmail3" class="txt-label">Email </label>
 									</div>
 									<div class="col-md-6">
 										<form:input class="form-control" path="contactEmail3" onBlur="emailValidation(this)" />
@@ -316,12 +320,7 @@
 			</div>
 		</div>
 	</div>
-	 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
-	 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-	 <script src="<c:url value="/resources/js/notify.min.js" />"></script>
-	 <script src="<c:url value="/resources/js/jquery.dataTables.min.js" />"></script>
-	 <script src="<c:url value="/resources/js/dataTables.bootstrap.js" />"></script>
-	 <script src="<c:url value="/resources/js/custom.js" />"></script>
+	 <jsp:include page="jsresources.jsp" />
  	<script type="text/javascript" >
        $('#webform').addClass('active') 
         $('#dashboard').removeClass('active')

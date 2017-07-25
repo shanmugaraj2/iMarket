@@ -7,10 +7,7 @@
 <head>
 <title>iMarket</title>
 
- <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
- <link href="<c:url value="/resources/css/custom.styles.css" />" rel="stylesheet">
- <link href="<c:url value="/resources/css/dataTables.bootstrap.css" />" rel="stylesheet">
- <link href="<c:url value="/resources/css/dataTables.bootstrap.min.css" />" rel="stylesheet">
+ 	<jsp:include page="cssresources.jsp" />
  
 
 </head>
@@ -71,12 +68,7 @@
       
     </div>
   </div>
-	 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
-	 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-	 <script src="<c:url value="/resources/js/notify.min.js" />"></script>
-	 <script src="<c:url value="/resources/js/jquery.dataTables.min.js" />"></script>
-	 <script src="<c:url value="/resources/js/dataTables.bootstrap.js" />"></script>
-	 <script src="<c:url value="/resources/js/custom.js" />"></script>
+	 <jsp:include page="jsresources.jsp" />
 	 <script type="text/javascript" >
        $('#dashboard').addClass('active') 
         $('#webform').removeClass('active')

@@ -2,76 +2,184 @@
 <html lang="en">
 <head>
 	
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/pell.min.css">
+ <link href="/imarket/resources/css/bootstrap.min.css" rel="stylesheet">
+ <link href="/imarket/resources/css/custom.styles.css" rel="stylesheet">
+ <link href="/imarket/resources/css/dataTables.bootstrap.css" rel="stylesheet">
+ <link href="/imarket/resources/css/dataTables.bootstrap.min.css" rel="stylesheet">
+ 
+ 	 <script src="/imarket/resources/js/jquery-3.2.1.min.js"></script>
+	 <script src="/imarket/resources/js/bootstrap.min.js"></script>
+	 <script src="/imarket/resources/js/notify.min.js"></script>
+	 <script src="/imarket/resources/js/jquery.dataTables.min.js"></script>
+	 <script src="/imarket/resources/js/dataTables.bootstrap.js"></script>
+	 <script src="/imarket/resources/js/custom.js"></script>
+
 </head>
 <body>
-	<div id="pell"></div>
-	<div>
-	  Text output:
-	  <div id="text-output"></div>
-	  HTML output:
-	  <pre id="html-output"></pre>
-	</div>
+	<dl class="dropdown"> 
+  
+    <dt>
+    <a href="#">
+      <span class="hida">Select</span>    
+      <p class="multiSel"></p>  
+    </a>
+    </dt>
+  
+    <dd>
+        <div class="mutliSelect">
+            <ul>
+                <li>
+                    <input type="checkbox" value="Apple" />Apple</li>
+                <li>
+                    <input type="checkbox" value="Blackberry" />Blackberry</li>
+                <li>
+                    <input type="checkbox" value="HTC" />HTC</li>
+                <li>
+                    <input type="checkbox" value="Sony Ericson" />Sony Ericson</li>
+                <li>
+                    <input type="checkbox" value="Motorola" />Motorola</li>
+                <li>
+                    <input type="checkbox" value="Nokia" />Nokia</li>
+            </ul>
+        </div>
+    </dd>
+  <button>Filter</button>
+</dl>
+	
 </body>
-  <script src="<%=request.getContextPath()%>/js/pell.min.js"></script> 
 <script type = 'text/javascript'>
+$(".dropdown dt a").on('click', function() {
+	  $(".dropdown dd ul").slideToggle('fast');
+	});
 
-const editor = pell.init({
-	  element: document.getElementById('pell'),
-	  onChange: html => {
-		 
-	    document.getElementById('text-output').innerHTML = html
-	    document.getElementById('html-output').textContent = html
-	  },
-	  styleWithCSS: true,
-	  actions: [
-	    'bold',
-	    'underline',
-	    'strikethrough',
-	    'olist',
-	    'ulist',
-	    'heading1',
-	    'heading2',
-	    'paragraph',
-	    {
-	      name: 'italic',
-	      result: () => window.pell.exec('italic')
-	    },
-	    {
-	      name: 'custom',
-	      icon: '<b><u><i>C</i></u></b>',
-	      title: 'Custom Action',
-	      result: () => console.log('YOLO')
-	    },
-	    {
-	      name: 'image',
-	      result: () => {
-	        const url = window.prompt('Enter the image URL')
-	        if (url) window.pell.exec('insertImage', url)
-	      }
-	    },
-	    {
-	      name: 'link',
-	      result: () => {
-	        const url = window.prompt('Enter the link URL')
-	        if (url) window.pell.exec('createLink', url)
-	      }
-	    }
-	  ],
-	  classes: {
-	    actionbar: 'pell-actionbar-custom-name',
-	    button: 'pell-button-custom-name',
-	    content: 'pell-content-custom-name'
+	$(".dropdown dd ul li a").on('click', function() {
+	  $(".dropdown dd ul").hide();
+	});
+
+	function getSelectedValue(id) {
+	  return $("#" + id).find("dt a span.value").html();
+	}
+
+	$(document).bind('click', function(e) {
+	  var $clicked = $(e.target);
+	  if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+	});
+
+	$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+	  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+	    title = $(this).val() + ",";
+
+	  if ($(this).is(':checked')) {
+	    var html = '<span title="' + title + '">' + title + '</span>';
+	    $('.multiSel').append(html);
+	    $(".hida").hide();
+	  } else {
+	    $('span[title="' + title + '"]').remove();
+	    var ret = $(".hida");
+	    $('.dropdown dt a').append(ret);
+
 	  }
-	})
-	 
-	// editor.content<HTMLElement> 
-	// To change the editor's content: 
-	//editor.content.innerHTML = '<b><u><i>Initial content!</i></u></b>'
+	});
+
 </script>
 <style>
-.pell-content-custom-name {
-  height: 400px;
+body {
+  font: normal 14px/100% "Andale Mono", AndaleMono, monospace;
+  color: #fff;
+  padding: 50px;
+  width: 300px;
+  margin: 0 auto;
+  background-color: #374954;
+}
+
+.dropdown {
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+}
+
+a {
+  color: #fff;
+}
+
+.dropdown dd,
+.dropdown dt {
+  margin: 0px;
+  padding: 0px;
+}
+
+.dropdown ul {
+  margin: -1px 0 0 0;
+}
+
+.dropdown dd {
+  position: relative;
+}
+
+.dropdown a,
+.dropdown a:visited {
+  color: #fff;
+  text-decoration: none;
+  outline: none;
+  font-size: 12px;
+}
+
+.dropdown dt a {
+  background-color: #4F6877;
+  display: block;
+  padding: 8px 20px 5px 10px;
+  min-height: 25px;
+  line-height: 24px;
+  overflow: hidden;
+  border: 0;
+  width: 272px;
+}
+
+.dropdown dt a span,
+.multiSel span {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 3px 2px 0;
+}
+
+.dropdown dd ul {
+  background-color: #4F6877;
+  border: 0;
+  color: #fff;
+  display: none;
+  left: 0px;
+  padding: 2px 15px 2px 5px;
+  position: absolute;
+  top: 2px;
+  width: 280px;
+  list-style: none;
+  height: 100px;
+  overflow: auto;
+}
+
+.dropdown span.value {
+  display: none;
+}
+
+.dropdown dd ul li a {
+  padding: 5px;
+  display: block;
+}
+
+.dropdown dd ul li a:hover {
+  background-color: #fff;
+}
+
+button {
+  background-color: #6BBE92;
+  width: 302px;
+  border: 0;
+  padding: 10px 0;
+  margin: 5px 0;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
 }
 </style>
 </html>

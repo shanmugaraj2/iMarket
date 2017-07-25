@@ -46,20 +46,25 @@ function saveClick(){
 	var count = 0;
 	var id = $('#record_id').val();
 	var mandatefields = ['companyName','leadSource','contactPerson1','contactJobTitle1','contactEmail1',
-		'contactPhone1','industry','employeeCount','website','country','companyEmail','revenue'];
+		'contactPhone1','employeeCount','website','country','companyEmail','revenue'];
 
 	for(i=0;i<mandatefields.length;i++){
 		var value = $('#'+mandatefields[i]).val();
+		$('.ms-options-wrap>button').removeClass('red')
 		$("#"+mandatefields[i]).removeClass('red');
 		if (value==null  || value.trim()=="" || value == 'NONE'){
 			$("#"+mandatefields[i]).addClass('red');
 			count++;
 		}
 	}
+	if($('#industry').val().length == 0){
+		$('.ms-options-wrap>button').addClass('red')
+	}
 
 	if(count>0){
-		//
+		
 	}else{
+	
 		if(duplicate == false){
 			$('#save-btn-final').click();
 		}else{

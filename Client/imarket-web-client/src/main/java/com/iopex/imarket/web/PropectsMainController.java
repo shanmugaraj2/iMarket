@@ -3,6 +3,8 @@ package com.iopex.imarket.web;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -51,6 +53,7 @@ public class PropectsMainController {
 			prospectsVO = new ProspectsVO();
 		}else{
 			prospectsVO = imarket.getProspect(id);
+			prospectsVO.setIndustries(new ArrayList<>(Arrays.asList(prospectsVO.getIndustry().toString().split(","))));
 		}
 		model.addAttribute("countryMap",countryMap);
 		model.addAttribute("industryMap",industryMap);
@@ -74,10 +77,18 @@ public class PropectsMainController {
 	public String savePropects(@ModelAttribute("prospectsVO") ProspectsVO prospectsVO,
 			RedirectAttributes redirectAttributes) {
 		try{
-		prospectsVO = imarket.saveProspects(prospectsVO);
+			StringBuffer industryConc = new StringBuffer();
+			for(String industry : prospectsVO.getIndustries()){
+				if(industryConc.length() != 0) 
+					industryConc.append(",");
+				industryConc.append(industry.trim());
+			}
+			prospectsVO.setIndustry(industryConc.toString());
+			prospectsVO = imarket.saveProspects(prospectsVO);
+		
 		redirectAttributes.addFlashAttribute("message", SAVE_MESSAGE);
 		}catch(Exception e){
-			redirectAttributes.addFlashAttribute("message", FAILURE_MESSAGE +"\n"+ e.getMessage());
+			redirectAttributes.addFlashAttribute("message", FAILURE_MESSAGE +"<br>"+ e.getMessage());
 		}
 		return "redirect:dashboard";
 	}
