@@ -1,0 +1,9 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+	 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
+	 <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+	 <script src="<c:url value="/resources/js/notify.min.js" />"></script>
+	 <script src="<c:url value="/resources/js/jquery.dataTables.min.js" />"></script>
+	 <script src="<c:url value="/resources/js/dataTables.bootstrap.js" />"></script>
+	 <script src="<c:url value="/resources/js/custom.js" />"></script>
+	  <script src="<c:url value="/resources/js/jquery.multiselect.js" />"></script>
+	   <script src="<c:url value="/resources/js/dropdowncustom.js" />"></script>
