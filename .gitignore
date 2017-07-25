@@ -1,0 +1,9 @@
+
+Client/imarket-web-client/.classpath
+Client/imarket-web-client/.settings
+Client/imarket-web-client/.project
+Client/imarket-web-client/WEB-INF/lib
+Services/imarket-service/target
+Common/imarket-common-utilities/target
+Server/imarket-base-persistence/target
+
