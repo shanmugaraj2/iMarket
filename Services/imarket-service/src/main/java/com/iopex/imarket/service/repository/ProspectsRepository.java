@@ -14,9 +14,6 @@ public interface ProspectsRepository extends JpaRepository<Prospects, Integer> {
 	
 	@Query("Select pro from Prospects pro where pro.isDeleted = ?1")
 	List<Prospects> findByIsDeleted(int isDeleted);
-	
-	/*@Modifying
-	@Query("Update Prospects pro set pro.isDeleted = 1? where pro.id = ?2")
-	int removeProspect(int status,Integer id);*/
+
 	
 }
