@@ -99,7 +99,7 @@ public class ImarketImpl implements Imarket {
 				prospects.getIndustry(), prospects.getEmployeeCount(), 
 				prospects.getWebsite(), prospects.getCountry(), 
 				prospects.getCompanyEmail(), prospects.getRevenue(), 
-				prospects.getLeadSource(),prospects.getIsDeleted());
+				prospects.getLeadSource(),prospects.getIsDeleted(),null);
 		
 		return prospectsVO;
 	}
