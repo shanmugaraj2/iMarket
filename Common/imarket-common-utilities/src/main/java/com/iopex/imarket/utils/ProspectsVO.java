@@ -36,7 +36,8 @@ public class ProspectsVO implements Serializable{
 	private String companyEmail;
 	private String revenue;
 	private String leadSource;
-	private int isDeleted;
+	private int status;
+	private String errorInfo;
 	private List<String> industries;
 	
 	
