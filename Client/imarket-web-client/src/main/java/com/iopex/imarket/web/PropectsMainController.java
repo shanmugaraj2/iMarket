@@ -69,7 +69,7 @@ public class PropectsMainController {
 		}else{
 			prospectsVO = imarket.getProspect(id);
 		}
-		prospectsVO.setIsDeleted(1);
+		prospectsVO.setStatus(1);
 		prospectsVO = imarket.saveProspects(prospectsVO);
 		return "redirect:dashboard";
 	}
