@@ -1,11 +1,18 @@
 package com.iopex.imarket.service.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -17,59 +24,26 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Prospects implements Serializable{
+public class Company implements Serializable{
 
 	
+	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
+	@Access(AccessType.PROPERTY)
 	private Integer id;
 	
-	@Column(name="company_name")
-	private String companyName;
-	
-	@Column(name="contact_person_1")
-	private String contactPerson1;
-	
-	@Column(name="contact_job_title_1")
-	private String contactJobTitle1;
-	
-	@Column(name="contact_email_1")
-	private String contactEmail1;
-	
-	@Column(name="contact_phone_1")
-	private String contactPhone1;
-	
-	@Column(name="contact_person_2")
-	private String contactPerson2;
-	
-	@Column(name="contact_job_title_2")
-	private String contactJobTitle2;
-
-	@Column(name="contact_email_2")
-	private String contactEmail2;
-	
-	@Column(name="contact_phone_2")
-	private String contactPhone2;
-	
-	@Column(name="contact_person_3")
-	private String contactPerson3;
-	
-	@Column(name="contact_job_title_3")
-	private String contactJobTitle3;
-	
-	@Column(name="contact_email_3")
-	private String contactEmail3;
-	
-	@Column(name="contact_phone_3")
-	private String contactPhone3;
+	@Column(name="name")
+	private String name;
 	
 	@Column(name="industry")
 	private String industry;
 	
-	@Column(name="employee_count")
-	private String employeeCount;
+	@Column(name="emp_count")
+	private String empCount;
 	
 	@Column(name="website")
 	private String website;
@@ -77,8 +51,8 @@ public class Prospects implements Serializable{
 	@Column(name = "country")
 	private String country;
 	
-	@Column(name="company_email")
-	private String companyEmail;
+	@Column(name="email")
+	private String email;
 	
 	@Column(name="revenue")
 	private String revenue;
@@ -86,7 +60,27 @@ public class Prospects implements Serializable{
 	@Column(name="lead_source")
 	private String leadSource;
 	
-	@Column(name="is_deleted")
-	private int isDeleted;
+	@Column(name="status")
+	private int status;
+	
+	@OneToMany(mappedBy="company", cascade = CascadeType.ALL)
+	private Set<Contact> contacts;
+	
+	
+/*	@Override
+    public String toString() {
+        String result = String.format(
+                "Company[id=%d, name='%s']%n",
+                id, name);
+        if (contacts != null) {
+            for(Contact ct : contacts) {
+                result += String.format(
+                        "Contact[id=%d, name='%s']%n",
+                        ct.getId(), ct.getName());
+            }
+        }
 
+        return result;
+    }*/
+	
 }

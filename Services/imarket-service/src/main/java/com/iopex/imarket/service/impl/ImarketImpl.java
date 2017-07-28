@@ -15,22 +15,45 @@ import org.springframework.stereotype.Service;
 
 import com.dickens.core.parser.GenericFileReader;
 import com.iopex.imarket.service.Imarket;
+import com.iopex.imarket.service.entity.Company;
 import com.iopex.imarket.service.entity.Country;
 import com.iopex.imarket.service.entity.Industry;
-import com.iopex.imarket.service.entity.Prospects;
+import com.iopex.imarket.service.repository.CompanyRepository;
+import com.iopex.imarket.service.repository.ContactRepository;
+//import com.iopex.imarket.service.entity.Prospects;
 import com.iopex.imarket.service.repository.CountryRepository;
 import com.iopex.imarket.service.repository.IndustryRepository;
-import com.iopex.imarket.service.repository.ProspectsRepository;
+
 import com.iopex.imarket.utils.HeaderList;
 import com.iopex.imarket.utils.ProspectsVO;
+import com.iopex.imarket.validation.Validations;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service("imarket")
 @Slf4j
 public class ImarketImpl implements Imarket {
-
+	
 	@Resource
+	private CompanyRepository companyRepository;
+	
+	@Resource
+	private ContactRepository contactRepository;
+	
+	@Override
+	@Transactional
+	public Company save(Company company) {
+		company = companyRepository.save(company);
+		return company;
+	}
+
+	@Override
+	public List<Company> getCompanys() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Resource
 	private ProspectsRepository prospectsRepository;
 	
 	@Resource
@@ -38,6 +61,9 @@ public class ImarketImpl implements Imarket {
 	
 	@Resource
 	private CountryRepository countryRepository;
+	
+	@Resource
+	private Validations validations;
 
 	@Transactional
 	public ProspectsVO saveProspects(ProspectsVO prospectsVO) {
@@ -82,7 +108,7 @@ public class ImarketImpl implements Imarket {
 				prospectsVO.getIndustry(), prospectsVO.getEmployeeCount(), 
 				prospectsVO.getWebsite(), prospectsVO.getCountry(), 
 				prospectsVO.getCompanyEmail(), prospectsVO.getRevenue(), 
-				prospectsVO.getLeadSource(),prospectsVO.getIsDeleted());
+				prospectsVO.getLeadSource(),prospectsVO.getStatus(),prospectsVO.getErrorInfo());
 		
 		return prospects;
 	}
@@ -99,7 +125,7 @@ public class ImarketImpl implements Imarket {
 				prospects.getIndustry(), prospects.getEmployeeCount(), 
 				prospects.getWebsite(), prospects.getCountry(), 
 				prospects.getCompanyEmail(), prospects.getRevenue(), 
-				prospects.getLeadSource(),prospects.getIsDeleted(),null);
+				prospects.getLeadSource(),prospects.getStatus(),prospects.getErrorInfo(),null);
 		
 		return prospectsVO;
 	}
@@ -133,11 +159,13 @@ public class ImarketImpl implements Imarket {
 	 	            	i = i + 1;
 	 	            }
 	            }
-	            response = validation(headerMap);
+	            response = validations.headerValidation(headerMap);
 	            if(response == null || response.isEmpty()){
 	            	List<Prospects> prospectsLst = new ArrayList<Prospects>();
+	            	
 	            	Prospects prospects = null;
-	            	while(iterator.hasNext()){                              
+	            	while(iterator.hasNext()){ 
+	            		 validations.fieldLevelValidation(row,headerMap);
 		            	row = iterator.next();
 		            	if(! row.get(headerMap.get(HeaderList.COMPANY_NAME.header())).isEmpty()){
 		            		prospects = new Prospects(null, row.get(headerMap.get(HeaderList.COMPANY_NAME.header())),
@@ -159,7 +187,7 @@ public class ImarketImpl implements Imarket {
 			            			row.get(headerMap.get(HeaderList.COUNTRY.header())),
 			            			row.get(headerMap.get(HeaderList.COMPANY_EMAIL.header())),
 			            			row.get(headerMap.get(HeaderList.REVENUE.header())),
-			            			row.get(headerMap.get(HeaderList.LEAD_SOURCE.header())),0);
+			            			row.get(headerMap.get(HeaderList.LEAD_SOURCE.header())),0,null);
 			            	prospectsLst.add(prospects);
 		            	}
 		            	
@@ -185,80 +213,12 @@ public class ImarketImpl implements Imarket {
 	        }
 			return response; 
 	}
-
-	public String validation(Map <String,Integer> headeList){
-		StringBuffer msg = new StringBuffer();
-		if(!headeList.containsKey(HeaderList.COMPANY_NAME.header()))
-			msg.append(HeaderList.COMPANY_NAME.header()).append("<br>"); 
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_PERSON_1.header()))
-			msg.append(HeaderList.CONTACT_PERSON_1.header()).append("<br>"); 
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_JOB_TITLE_1.header()))
-			msg.append(HeaderList.CONTACT_JOB_TITLE_1.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_EMAIL_ADDRESS_1.header()))
-			msg.append(HeaderList.CONTACT_EMAIL_ADDRESS_1.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_PHONE_1.header()))
-			msg.append(HeaderList.CONTACT_PHONE_1.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_PERSON_2.header()))
-			msg.append(HeaderList.CONTACT_PERSON_2.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_JOB_TITLE_2.header()))
-			msg.append(HeaderList.CONTACT_JOB_TITLE_2.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_EMAIL_ADDRESS_2.header()))
-			msg.append(HeaderList.CONTACT_EMAIL_ADDRESS_2.header()).append("<br>"); 
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_PHONE_2.header()))
-			msg.append(HeaderList.CONTACT_PHONE_1.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_PERSON_3.header()))
-			msg.append(HeaderList.CONTACT_PERSON_3.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_JOB_TITLE_3.header()))
-			msg.append(HeaderList.CONTACT_JOB_TITLE_3.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_EMAIL_ADDRESS_3.header()))
-			msg.append(HeaderList.CONTACT_EMAIL_ADDRESS_3.header()).append("<br>"); 
-		
-		if(!headeList.containsKey(HeaderList.CONTACT_PHONE_3.header()))
-			msg.append(HeaderList.CONTACT_PHONE_3.header()).append("<br>");  
-		
-		if(!headeList.containsKey(HeaderList.EMPLOYEE_COUNT.header()))
-			msg.append(HeaderList.EMPLOYEE_COUNT.header()).append("<br>");
-		
-		if(!headeList.containsKey(HeaderList.EMPLOYEE_COUNT.header()))
-			msg.append(HeaderList.EMPLOYEE_COUNT.header()).append("<br>");
-		
-		if(!headeList.containsKey(HeaderList.COMPANY_WEBSITE.header()))
-			msg.append(HeaderList.COMPANY_WEBSITE.header()).append("<br>");
-		
-		if(!headeList.containsKey(HeaderList.COUNTRY.header()))
-			msg.append(HeaderList.COUNTRY.header()).append("<br>");
-		
-		if(!headeList.containsKey(HeaderList.COMPANY_EMAIL.header()))
-			msg.append(HeaderList.COMPANY_EMAIL.header()).append("<br>");
-		
-		if(!headeList.containsKey(HeaderList.REVENUE.header()))
-			msg.append(HeaderList.REVENUE.header()).append("<br>");
-		
-		if(!headeList.containsKey(HeaderList.LEAD_SOURCE.header()))
-			msg.append(HeaderList.LEAD_SOURCE.header()).append("<br>");
-		
-		
-		if(msg.length() > 0)
-			return "Following Headers are Missing "+ "<br>" + msg.toString();
-		else
-			return null;
-	}
+	
 	
 
 	@Override
-	public List<ProspectsVO> retriveProspects(int isDeleted) {
-		List<Prospects> prospectsLst = prospectsRepository.findByIsDeleted(isDeleted);;
+	public List<ProspectsVO> retriveProspects(int status) {
+		List<Prospects> prospectsLst = prospectsRepository.findByStatus(status);;
 		List<ProspectsVO> prospectsVOLst = new ArrayList<ProspectsVO>();
 		for(Prospects prospects : prospectsLst){
 			prospectsVOLst.add(convertEntityToVo(prospects));
@@ -272,12 +232,6 @@ public class ImarketImpl implements Imarket {
 		ProspectsVO prospectsVO = convertEntityToVo(prospects);
 		return prospectsVO;
 	}
-
-	@Override
-	public void removeProspect(Integer id) {
-		//prospectsRepository.removeProspect(1,id);
-		log.debug("test");
-	}
-
+*/
 	
 }
